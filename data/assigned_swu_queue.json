@@ -1,0 +1,126 @@
+{
+  "schema_version": "reqea.worker.v1",
+  "owner": "B",
+  "repo": "hibi89/REQ-Evidence-Auditor-B-",
+  "branch": "feature/reqea-b-codegraph-p1-20261118",
+  "starting_sha": "97cbb06a0b478447eb6d6934a130837e1ff3d1ff",
+  "canonical_a_design_sha": "e58e14ee4ef84dfc226d657cfe45b1d40cfb9ba9",
+  "contract_version": "reqea.v1",
+  "allowed_paths": [
+    "src/reqea_codegraph/**",
+    "tests/b/**"
+  ],
+  "phase": "P0_READY_P1_NOT_STARTED",
+  "official_rate": "UNASSESSED",
+  "swus": [
+    {
+      "id": "B-01",
+      "req_ids": [
+        "REQ-011",
+        "REQ-012"
+      ],
+      "title": "경로·symlink·제외 목록·depth/byte/files 제한 walker",
+      "owner": "B",
+      "depends_on": [],
+      "allowed_paths": [
+        "src/reqea_codegraph/walk.py"
+      ],
+      "acceptance": "경로이탈·민감 파일 기본 제외, 제한 초과 경고",
+      "status": "READY",
+      "implementation_status": "NOT_STARTED",
+      "verification_status": "NOT_RUN",
+      "retry_stage": "NONE",
+      "initial_no_progress_attempts": 0,
+      "redesign_no_progress_attempts": 0
+    },
+    {
+      "id": "B-02",
+      "req_ids": [
+        "REQ-013"
+      ],
+      "title": "파일 메타/언어/SHA256 정규화",
+      "owner": "B",
+      "depends_on": [
+        "B-01"
+      ],
+      "allowed_paths": [
+        "src/reqea_codegraph/files.py"
+      ],
+      "acceptance": "같은 내용에 deterministic SHA256/path",
+      "status": "READY",
+      "implementation_status": "NOT_STARTED",
+      "verification_status": "NOT_RUN",
+      "retry_stage": "NONE",
+      "initial_no_progress_attempts": 0,
+      "redesign_no_progress_attempts": 0
+    },
+    {
+      "id": "B-03",
+      "req_ids": [
+        "REQ-014"
+      ],
+      "title": "Python AST 심볼/라인/임포트 인덱스",
+      "owner": "B",
+      "depends_on": [
+        "B-02"
+      ],
+      "allowed_paths": [
+        "src/reqea_codegraph/python_ast.py"
+      ],
+      "acceptance": "코드 실행 없이 함수/클래스/라인 출력",
+      "status": "READY",
+      "implementation_status": "NOT_STARTED",
+      "verification_status": "NOT_RUN",
+      "retry_stage": "NONE",
+      "initial_no_progress_attempts": 0,
+      "redesign_no_progress_attempts": 0
+    },
+    {
+      "id": "B-04",
+      "req_ids": [
+        "REQ-015",
+        "REQ-016"
+      ],
+      "title": "Python 관계 후보 + JS/TS 제한적 static parser",
+      "owner": "B",
+      "depends_on": [
+        "B-03"
+      ],
+      "allowed_paths": [
+        "src/reqea_codegraph/relations.py"
+      ],
+      "acceptance": "관계 후보와 동적 해석 미지원 경고",
+      "status": "READY",
+      "implementation_status": "NOT_STARTED",
+      "verification_status": "NOT_RUN",
+      "retry_stage": "NONE",
+      "initial_no_progress_attempts": 0,
+      "redesign_no_progress_attempts": 0
+    },
+    {
+      "id": "B-05",
+      "req_ids": [
+        "REQ-017",
+        "REQ-018"
+      ],
+      "title": "정적 인덱스 엔트리 build_code_index + file-level 오류 복구",
+      "owner": "B",
+      "depends_on": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-04"
+      ],
+      "allowed_paths": [
+        "src/reqea_codegraph/__init__.py"
+      ],
+      "acceptance": "계약 JSON, 개별 실패/scan truncate 표시",
+      "status": "READY",
+      "implementation_status": "NOT_STARTED",
+      "verification_status": "NOT_RUN",
+      "retry_stage": "NONE",
+      "initial_no_progress_attempts": 0,
+      "redesign_no_progress_attempts": 0
+    }
+  ]
+}
