@@ -19,7 +19,7 @@
 707bd82d468fbae7926e496f7494cf5014ac2d66f4313b0a780dbf615beb858b  src/reqea_codegraph/files.py
 527fc6c28346be19b3392c0947499abbc269309e4151569ab59a13684e6288b5  src/reqea_codegraph/python_ast.py
 3fec0661c98c8cc932fb3e5956f584f77af598c2893e88d1fa3f85703e5a4957  src/reqea_codegraph/relations.py
-8c3784ffc3f49b106830c7d1a98ce79e539675f07d42d1286928482e5a4957  src/reqea_codegraph/walk.py
+8c3784ffc3f49b106830c7d1a98ce79e539675f07d42d1286928482e5afdd157  src/reqea_codegraph/walk.py
 e0509f73e02902ca57e922a0494c03cb054dc3fbf3b550f1ba34ab4e0c6ff2b6  tests/b/test_codegraph.py
 ```
 
