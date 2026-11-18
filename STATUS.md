@@ -1,7 +1,10 @@
 # STATUS — REQEA B (2026-11-18 KST)
-Assigned SWUs: 5 (B-01, B-02, B-03, B-04, B-05).
-P1 functional code: NOT_STARTED, 0 implemented candidates. Official implementation completion: UNASSESSED.
-P2: NOT_RUN / UNASSESSED. No real product tests or deployment performed.
-Working branch: feature/reqea-b-codegraph-p1-20261118 (starts from 97cbb06a0b478447eb6d6934a130837e1ff3d1ff).
-Next READY: B-01. Only src/reqea_codegraph/** + tests/b/** will be copied to A.
-Public GitHub; never commit secrets/customer code. No main merge or deletion.
+
+- **P1 code candidates:** 5 / 5 assigned SWUs = B-01..B-05 (`IMPLEMENTED_UNVERIFIED`); exact code commit `ff7741477727a42adb9a8db09019ebb1159834bf`.
+- **Covered requirements:** REQ-011..REQ-018 (8 assigned requirements); only P1 code-path candidates, no accepted verification claim.
+- **Branch:** `feature/reqea-b-codegraph-p1-20261118`. A blueprint `e58e14ee4ef84dfc226d657cfe45b1d40cfb9ba9`; contract `reqea.v1`.
+- **Local syntax/smoke:** PASS compileall, PASS 3/3 grouped smoke (synthetic tempfile only).
+- **Official implementation completion:** UNASSESSED (no product-wide signed weight/acceptance). **P2 verification:** NOT_RUN / UNASSESSED. **Integration to A:** NOT_RUN. Release: HOLD.
+- **B READY remaining:** 0 of 5. No failed implementation SWUs or 2+2 escalations; no owner approval needed for code-only B scope.
+- **Next:** A integrates only B code/test allowed paths from exact code commit and runs its own integration smoke; P2 independent security, Windows reparse, big-input and JS/TS false-positive checks deferred.
+- **Timing:** began 2026-11-18 15:07 KST; code and tests finished 15:19 KST. Handoff details and file SHA256: `HANDOFF.md`.

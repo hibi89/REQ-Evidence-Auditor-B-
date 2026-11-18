@@ -10,7 +10,7 @@
     "src/reqea_codegraph/**",
     "tests/b/**"
   ],
-  "phase": "P0_READY_P1_NOT_STARTED",
+  "phase": "P1_IMPLEMENTED_UNVERIFIED_A_INTEGRATION_PENDING",
   "official_rate": "UNASSESSED",
   "swus": [
     {
@@ -26,12 +26,14 @@
         "src/reqea_codegraph/walk.py"
       ],
       "acceptance": "경로이탈·민감 파일 기본 제외, 제한 초과 경고",
-      "status": "READY",
-      "implementation_status": "NOT_STARTED",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "verification_status": "NOT_RUN",
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
-      "redesign_no_progress_attempts": 0
+      "redesign_no_progress_attempts": 0,
+      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
+      "local_checks": "PASS: compileall and grouped 3-test smoke"
     },
     {
       "id": "B-02",
@@ -47,12 +49,14 @@
         "src/reqea_codegraph/files.py"
       ],
       "acceptance": "같은 내용에 deterministic SHA256/path",
-      "status": "READY",
-      "implementation_status": "NOT_STARTED",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "verification_status": "NOT_RUN",
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
-      "redesign_no_progress_attempts": 0
+      "redesign_no_progress_attempts": 0,
+      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
+      "local_checks": "PASS: compileall and grouped 3-test smoke"
     },
     {
       "id": "B-03",
@@ -68,12 +72,14 @@
         "src/reqea_codegraph/python_ast.py"
       ],
       "acceptance": "코드 실행 없이 함수/클래스/라인 출력",
-      "status": "READY",
-      "implementation_status": "NOT_STARTED",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "verification_status": "NOT_RUN",
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
-      "redesign_no_progress_attempts": 0
+      "redesign_no_progress_attempts": 0,
+      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
+      "local_checks": "PASS: compileall and grouped 3-test smoke"
     },
     {
       "id": "B-04",
@@ -90,12 +96,14 @@
         "src/reqea_codegraph/relations.py"
       ],
       "acceptance": "관계 후보와 동적 해석 미지원 경고",
-      "status": "READY",
-      "implementation_status": "NOT_STARTED",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "verification_status": "NOT_RUN",
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
-      "redesign_no_progress_attempts": 0
+      "redesign_no_progress_attempts": 0,
+      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
+      "local_checks": "PASS: compileall and grouped 3-test smoke"
     },
     {
       "id": "B-05",
@@ -115,12 +123,15 @@
         "src/reqea_codegraph/__init__.py"
       ],
       "acceptance": "계약 JSON, 개별 실패/scan truncate 표시",
-      "status": "READY",
-      "implementation_status": "NOT_STARTED",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "verification_status": "NOT_RUN",
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
-      "redesign_no_progress_attempts": 0
+      "redesign_no_progress_attempts": 0,
+      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
+      "local_checks": "PASS: compileall and grouped 3-test smoke"
     }
-  ]
+  ],
+  "p2": "NOT_RUN"
 }
