@@ -64,6 +64,33 @@ class CodegraphSmoke(unittest.TestCase):
             with self.assertRaises(ValueError):
                 scan_tree(d, {"max_files": True})
 
+    def test_warning_fanout_is_bounded_and_marks_scan_incomplete(self):
+        # More parse failures than the global report bound must not create a huge JSON report.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            for i in range(2060):
+                (root / f"broken{i:04d}.py").write_text("def broken(:", encoding="utf8")
+            result = build_code_index(d, {"max_files": 3000})
+            self.assertTrue(result["limits"]["truncated"])
+            self.assertLessEqual(len(result["warnings"]), 2049)
+            self.assertIn("warning_limit_exceeded", result["warnings"])
+            self.assertEqual(result["limits"]["scanned_files"], 2060)
+
+        # Link-skip warnings are also bounded, before file parsing begins.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            try:
+                (root / "link0000.py").symlink_to("missing.py")
+            except (OSError, NotImplementedError):
+                return  # Windows without symlink privileges; parse failure coverage above still applies.
+            for i in range(1, 1100):
+                (root / f"link{i:04d}.py").symlink_to("missing.py")
+            result = build_code_index(d, {})
+            self.assertTrue(result["limits"]["truncated"])
+            self.assertLessEqual(len(result["warnings"]), 1025)
+            self.assertIn("warning_limit_exceeded", result["warnings"])
+            self.assertEqual(result["limits"]["skipped_files"], 1100)
+
     def test_total_and_count_bounds(self):
         with tempfile.TemporaryDirectory() as d:
             (Path(d) / "a.py").write_text("a=1")

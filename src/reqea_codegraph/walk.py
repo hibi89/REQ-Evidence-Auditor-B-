@@ -29,6 +29,7 @@ SKIP_NAMES = frozenset({
     "secrets.yaml", "secrets.yml", "config.json", "kubeconfig",
 })
 SKIP_SUFFIXES = (".pem", ".p12", ".pfx", ".key", ".jks", ".keystore")
+MAX_WALK_WARNINGS = 1_024
 
 
 @dataclass(frozen=True)
@@ -46,6 +47,19 @@ class WalkResult:
     warnings: list[str]
     truncated: bool
     skipped_files: int
+    warning_limited: bool = False
+
+
+def _add_warning(result: WalkResult, warning: str) -> None:
+    """Bound untrusted path-derived warning output independently of file limits."""
+    if result.warning_limited:
+        return
+    if len(result.warnings) >= MAX_WALK_WARNINGS:
+        result.warning_limited = True
+        result.truncated = True
+        result.warnings.append("warning_limit_exceeded")
+    else:
+        result.warnings.append(warning)
 
 
 def safe_relative(path: str) -> bool:
@@ -107,7 +121,7 @@ def scan_tree(root: str, options: dict) -> WalkResult:
             entries = sorted(os.scandir(directory), key=lambda e: e.name)
         except OSError:
             result.truncated = True
-            result.warnings.append("directory_unreadable:" + (prefix or "."))
+            _add_warning(result, "directory_unreadable:" + (prefix or "."))
             continue
         subdirs = []
         for entry in entries:
@@ -120,11 +134,11 @@ def scan_tree(root: str, options: dict) -> WalkResult:
             except OSError:
                 result.skipped_files += 1
                 result.truncated = True
-                result.warnings.append("entry_unreadable:" + relative)
+                _add_warning(result, "entry_unreadable:" + relative)
                 continue
             if stat.S_ISLNK(info.st_mode) or _is_reparse(info):
                 result.skipped_files += 1
-                result.warnings.append("link_skipped:" + relative)
+                _add_warning(result, "link_skipped:" + relative)
                 continue
             if stat.S_ISDIR(info.st_mode):
                 if _excluded(entry.name, True):
@@ -132,7 +146,7 @@ def scan_tree(root: str, options: dict) -> WalkResult:
                 elif depth >= limits["max_depth"]:
                     result.skipped_files += 1
                     result.truncated = True
-                    result.warnings.append("max_depth_exceeded:" + relative)
+                    _add_warning(result, "max_depth_exceeded:" + relative)
                 else:
                     subdirs.append((Path(entry.path), relative + "/", depth + 1))
                 continue
@@ -142,17 +156,17 @@ def scan_tree(root: str, options: dict) -> WalkResult:
             if len(result.files) >= limits["max_files"]:
                 result.skipped_files += 1
                 result.truncated = True
-                result.warnings.append("max_files_exceeded")
+                _add_warning(result, "max_files_exceeded")
                 continue
             if info.st_size > limits["max_file_bytes"]:
                 result.skipped_files += 1
                 result.truncated = True
-                result.warnings.append("max_file_bytes_exceeded:" + relative)
+                _add_warning(result, "max_file_bytes_exceeded:" + relative)
                 continue
             if info.st_size > remaining:
                 result.skipped_files += 1
                 result.truncated = True
-                result.warnings.append("max_total_bytes_exceeded")
+                _add_warning(result, "max_total_bytes_exceeded")
                 continue
             remaining -= info.st_size
             result.files.append(WalkFile(relative, info.st_size, info.st_dev, info.st_ino))

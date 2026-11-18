@@ -28,6 +28,17 @@ def build_code_index(root: str, options: dict) -> dict:
     warnings = set(scan.warnings)
     skipped = scan.skipped_files
     truncated = scan.truncated
+
+    def add_warning(message: str) -> None:
+        nonlocal truncated
+        if message in warnings:
+            return
+        if len(warnings) >= MAX_WARNINGS:
+            truncated = True
+            warnings.add("warning_limit_exceeded")
+        else:
+            warnings.add(message)
+
     for entry in scan.files:
         try:
             item = read_file(scan.root, entry, options.get("max_file_bytes", DEFAULT_LIMITS["max_file_bytes"]))
@@ -38,7 +49,7 @@ def build_code_index(root: str, options: dict) -> dict:
                 "binary_file_skipped", "non_utf8_file_skipped", "file_changed_or_unsafe",
                 "file_changed_during_read", "symlink_or_reparse_disallowed", "path_escape",
             } else "file_unreadable"
-            warnings.add(code + ":" + entry.path)
+            add_warning(code + ":" + entry.path)
             continue
         record = item.record
         local_edges: list[dict] = []
@@ -63,12 +74,7 @@ def build_code_index(root: str, options: dict) -> dict:
             local_warnings.append("edge_limit_exceeded")
             truncated = True
         for warning in local_warnings:
-            if len(warnings) < MAX_WARNINGS:
-                warnings.add(warning + ":" + entry.path)
-            else:
-                warnings.add("warning_limit_exceeded")
-                truncated = True
-                break
+            add_warning(warning + ":" + entry.path)
         files.append(record)
         edges.extend(local_edges)
     files.sort(key=lambda f: f["path"])
