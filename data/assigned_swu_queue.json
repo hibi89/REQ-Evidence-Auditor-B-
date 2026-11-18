@@ -10,7 +10,7 @@
     "src/reqea_codegraph/**",
     "tests/b/**"
   ],
-  "phase": "P1_IMPLEMENTED_UNVERIFIED_A_INTEGRATION_PENDING",
+  "phase": "P1_IMPLEMENTED_UNVERIFIED_A_REINTEGRATION_PENDING",
   "official_rate": "UNASSESSED",
   "swus": [
     {
@@ -32,8 +32,8 @@
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
       "redesign_no_progress_attempts": 0,
-      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
-      "local_checks": "PASS: compileall and grouped 3-test smoke"
+      "implementation_commit_sha": "4ffaa0e5c7278acd28f20813fe08d669f64753f0",
+      "local_checks": "PASS: compileall and grouped 4-test smoke; 2026-11-18 boundary fix"
     },
     {
       "id": "B-02",
@@ -55,8 +55,8 @@
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
       "redesign_no_progress_attempts": 0,
-      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
-      "local_checks": "PASS: compileall and grouped 3-test smoke"
+      "implementation_commit_sha": "4ffaa0e5c7278acd28f20813fe08d669f64753f0",
+      "local_checks": "PASS: compileall and grouped 4-test smoke; 2026-11-18 boundary fix"
     },
     {
       "id": "B-03",
@@ -78,8 +78,8 @@
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
       "redesign_no_progress_attempts": 0,
-      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
-      "local_checks": "PASS: compileall and grouped 3-test smoke"
+      "implementation_commit_sha": "4ffaa0e5c7278acd28f20813fe08d669f64753f0",
+      "local_checks": "PASS: compileall and grouped 4-test smoke; 2026-11-18 boundary fix"
     },
     {
       "id": "B-04",
@@ -102,8 +102,8 @@
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
       "redesign_no_progress_attempts": 0,
-      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
-      "local_checks": "PASS: compileall and grouped 3-test smoke"
+      "implementation_commit_sha": "4ffaa0e5c7278acd28f20813fe08d669f64753f0",
+      "local_checks": "PASS: compileall and grouped 4-test smoke; 2026-11-18 boundary fix"
     },
     {
       "id": "B-05",
@@ -129,9 +129,19 @@
       "retry_stage": "NONE",
       "initial_no_progress_attempts": 0,
       "redesign_no_progress_attempts": 0,
-      "implementation_commit_sha": "ff7741477727a42adb9a8db09019ebb1159834bf",
-      "local_checks": "PASS: compileall and grouped 3-test smoke"
+      "implementation_commit_sha": "4ffaa0e5c7278acd28f20813fe08d669f64753f0",
+      "local_checks": "PASS: compileall and grouped 4-test smoke; 2026-11-18 boundary fix"
     }
   ],
-  "p2": "NOT_RUN"
+  "p2": "NOT_RUN",
+  "latest_repair": {
+    "swus": [
+      "B-01",
+      "B-05"
+    ],
+    "code_commit_sha": "4ffaa0e5c7278acd28f20813fe08d669f64753f0",
+    "reason": "bounded warnings and conservative truncated flag",
+    "checks": "compileall PASS, synthetic smoke 4/4 PASS",
+    "integration": "A_REIMPORT_PENDING"
+  }
 }
